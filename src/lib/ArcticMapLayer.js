@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom'
 import { geojsonToArcGIS } from '@esri/arcgis-to-geojson-utils';
 
-import {
-    loadModules
-} from 'react-arcgis';
+//import {
+//    loadModules
+//} from 'react-arcgis';
+// Use @arcgis/core or esri-loader directly in your React application
+import { setDefaultOptions } from 'esri-loader';
+
+// configure esri-loader to use version 4.25
+// and the CSS for that version from the ArcGIS CDN
+setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
 
 class ArcticMapLayer extends React.Component {
     static displayName = "ArcticMapLayer";
@@ -35,9 +41,10 @@ class ArcticMapLayer extends React.Component {
             "esri/layers/ImageryLayer",
 
             "esri/layers/GraphicsLayer",
-            "esri/tasks/IdentifyTask",
-            "esri/tasks/support/IdentifyParameters",
-            //"esri/rest/support/IdentifyParameters",
+            "esri/rest/identify",
+            //"esri/tasks/IdentifyTask",
+            //"esri/tasks/support/IdentifyParameters",
+            "esri/rest/support/IdentifyParameters",
             "esri/geometry/Point",
             "esri/symbols/SimpleMarkerSymbol",
             "esri/layers/GroupLayer",
@@ -49,7 +56,7 @@ class ArcticMapLayer extends React.Component {
             ImageryLayer,
 
             GraphicsLayer,
-            IdentifyTask,
+            identify,
             IdentifyParameters,
             Point,
             SimpleMarkerSymbol,
@@ -231,7 +238,7 @@ class ArcticMapLayer extends React.Component {
                                 }
                             });
         
-                            child.identifyTask = new IdentifyTask(child.props.src);
+                            child.identifyTask = new identify(child.props.src);
                             child.params = new IdentifyParameters();
                             child.params.tolerance = 3;
                             child.params.layerIds = layerids;
@@ -302,7 +309,7 @@ class ArcticMapLayer extends React.Component {
                         });
                         layerids.reverse();
                         if(src===srcsplit[srcsplit.length-1]){
-                            self.identifyTask = new IdentifyTask(src);
+                            self.identifyTask = new identify(src);
                             self.params = new IdentifyParameters();
                             self.params.tolerance = 3;
                             self.params.layerIds = layerids;
@@ -376,7 +383,7 @@ class ArcticMapLayer extends React.Component {
                     });
                     //layerids.reverse();
 
-                    self.identifyTask = new IdentifyTask(self.props.src);
+                    self.identifyTask = new identify(self.props.src);
                     self.params = new IdentifyParameters();
                     self.params.tolerance = 3;
                     self.params.layerIds = layerids;

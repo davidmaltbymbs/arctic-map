@@ -1,7 +1,6 @@
 import React from 'react';
 import async from 'async';
 import ReactDOM from 'react-dom';
-import { Map, loadModules } from 'react-arcgis';
 import { geojsonToArcGIS, arcgisToGeoJSON } from '@esri/arcgis-to-geojson-utils';
 
 function styleInject(css, ref) {
@@ -34,6 +33,39 @@ function styleInject(css, ref) {
 var css_248z = ".ArcticMap_simple-form-group__1NBSl {\r\n    margin-bottom: 1rem;\r\n  }\r\n  .ArcticMap_simple-text-label__sb2Ru {\r\n    display: block;\r\n    color: red;\r\n  }\r\n  .ArcticMap_simple-text-input__2vXLO {\r\n    display: inline-block;\r\n    margin-bottom: 0.5rem;\r\n    font-size: 16px;\r\n    font-weight: 400;\r\n    color: rgb(33, 37, 41);\r\n  }\r\n\r\n#ArcticMap_bottomleftbar__m8-8e{\r\n  background: #fff;\r\n  position: absolute;\r\n  bottom: 30px;\r\n  left: 15px;\r\n  padding: 0px;\r\n  font-family: 'Avenir Next W00\",\"Helvetica Neue\",Helvetica,Arial,sans-serif'\r\n}\r\n\r\n#ArcticMap_bottomleftbar__m8-8e p{\r\n  padding-left: 12px;\r\n  padding-right: 12px;\r\n}\r\n  \r\n#ArcticMap_bottombar__2nOal {\r\n    background: #fff;\r\n    position: absolute;\r\n    bottom: 30px;\r\n    right: 15px;\r\n    padding: 0;\r\n  }\r\n\r\n  .ArcticMap_action-button__2k3Yr {\r\n    font-size: 16px;\r\n    background-color: transparent;\r\n    border: 1px solid #D3D3D3;\r\n    color: #6e6e6e;\r\n    height: 32px;\r\n    width: 32px;\r\n    text-align: center;\r\n    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);\r\n  }\r\n\r\n  .ArcticMap_action-button__2k3Yr:hover,\r\n  .ArcticMap_action-button__2k3Yr:focus {\r\n    background: #0079c1;\r\n    color: #e4e4e4;\r\n  }\r\n\r\n  .ArcticMap_active__2g4Ex {\r\n    background: #0079c1;\r\n    color: #e4e4e4;\r\n  }\r\n\r\n  .ArcticMap_arctic-map-hidden__2w_Fs {\r\n    display: none !important;\r\n  }";
 var styles = { "simple-form-group": "ArcticMap_simple-form-group__1NBSl", "simple-text-label": "ArcticMap_simple-text-label__sb2Ru", "simple-text-input": "ArcticMap_simple-text-input__2vXLO", "bottomleftbar": "ArcticMap_bottomleftbar__m8-8e", "bottombar": "ArcticMap_bottombar__2nOal", "action-button": "ArcticMap_action-button__2k3Yr", "active": "ArcticMap_active__2g4Ex", "arctic-map-hidden": "ArcticMap_arctic-map-hidden__2w_Fs" };
 styleInject(css_248z);
+
+/* Copyright (c) 2022 Environmental Systems Research Institute, Inc.
+ * Apache-2.0 */
+var isBrowser = typeof window !== 'undefined';
+// allow consuming libraries to provide their own Promise implementations
+({
+    Promise: isBrowser ? window['Promise'] : undefined
+});
+
+/* Copyright (c) 2022 Environmental Systems Research Institute, Inc.
+ * Apache-2.0 */
+
+/* Copyright (c) 2022 Environmental Systems Research Institute, Inc.
+ * Apache-2.0 */
+
+/* Copyright (c) 2022 Environmental Systems Research Institute, Inc.
+ * Apache-2.0 */
+
+/* Copyright (c) 2022 Environmental Systems Research Institute, Inc.
+ * Apache-2.0 */
+
+/*
+  Copyright (c) 2022 Esri
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -594,19 +626,20 @@ var ArcticMap = function (_React$Component) {
 
       loadModules(['esri/widgets/Locate', 'esri/widgets/BasemapGallery', 'esri/widgets/Home', 'esri/widgets/Search', 'esri/layers/FeatureLayer',
       // 'esri/tasks/Locator',
-      'esri/geometry/geometryEngine', 'esri/tasks/support/IdentifyParameters', 'esri/request', 'esri/geometry/Polygon']).then(function (_ref3) {
-        var _ref4 = slicedToArray(_ref3, 9),
+      'esri/rest/locator', 'esri/geometry/geometryEngine',
+      //'esri/tasks/support/IdentifyParameters',
+      'esri/rest/support/IdentifyParameters', 'esri/request', 'esri/geometry/Polygon']).then(function (_ref3) {
+        var _ref4 = slicedToArray(_ref3, 10),
             Locate = _ref4[0],
             BasemapGallery = _ref4[1],
             Home = _ref4[2],
             Search = _ref4[3],
             FeatureLayer = _ref4[4],
-
-        // Locator,
-        geometryEngine = _ref4[5],
-            IdentifyParameters = _ref4[6],
-            Request = _ref4[7],
-            Polygon = _ref4[8];
+            Locator = _ref4[5],
+            geometryEngine = _ref4[6],
+            IdentifyParameters = _ref4[7],
+            Request = _ref4[8],
+            Polygon = _ref4[9];
 
         window._request = Request;
         window._map = self;
@@ -1360,14 +1393,17 @@ var ArcticMapLayer = function (_React$Component) {
 
             var self = this;
             //        console.log("ComponentDidMount: "+this.props.title);
-            loadModules(['esri/Graphic', "esri/layers/FeatureLayer", "esri/layers/MapImageLayer", "esri/layers/ImageryLayer", "esri/layers/GraphicsLayer", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/geometry/Point", "esri/symbols/SimpleMarkerSymbol", "esri/layers/GroupLayer", "esri/renderers/Renderer"]).then(function (_ref) {
+            loadModules(['esri/Graphic', "esri/layers/FeatureLayer", "esri/layers/MapImageLayer", "esri/layers/ImageryLayer", "esri/layers/GraphicsLayer", "esri/rest/identify",
+            //"esri/tasks/IdentifyTask",
+            //"esri/tasks/support/IdentifyParameters",
+            "esri/rest/support/IdentifyParameters", "esri/geometry/Point", "esri/symbols/SimpleMarkerSymbol", "esri/layers/GroupLayer", "esri/renderers/Renderer"]).then(function (_ref) {
                 var _ref2 = slicedToArray(_ref, 11),
                     Graphic = _ref2[0],
                     FeatureLayer = _ref2[1],
                     MapImageLayer = _ref2[2],
                     ImageryLayer = _ref2[3],
                     GraphicsLayer = _ref2[4],
-                    IdentifyTask = _ref2[5],
+                    identify = _ref2[5],
                     IdentifyParameters = _ref2[6],
                     Point = _ref2[7],
                     SimpleMarkerSymbol = _ref2[8],
@@ -1544,7 +1580,7 @@ var ArcticMapLayer = function (_React$Component) {
                                     }
                                 });
 
-                                child.identifyTask = new IdentifyTask(child.props.src);
+                                child.identifyTask = new identify(child.props.src);
                                 child.params = new IdentifyParameters();
                                 child.params.tolerance = 3;
                                 child.params.layerIds = layerids;
@@ -1614,7 +1650,7 @@ var ArcticMapLayer = function (_React$Component) {
                             });
                             layerids.reverse();
                             if (src === srcsplit[srcsplit.length - 1]) {
-                                self.identifyTask = new IdentifyTask(src);
+                                self.identifyTask = new identify(src);
                                 self.params = new IdentifyParameters();
                                 self.params.tolerance = 3;
                                 self.params.layerIds = layerids;
@@ -1687,7 +1723,7 @@ var ArcticMapLayer = function (_React$Component) {
                         });
                         //layerids.reverse();
 
-                        self.identifyTask = new IdentifyTask(self.props.src);
+                        self.identifyTask = new identify(self.props.src);
                         self.params = new IdentifyParameters();
                         self.params.tolerance = 3;
                         self.params.layerIds = layerids;
@@ -3958,6 +3994,10 @@ var ArcticMapBaseControl = function (_React$Component) {
         };
 
         _this.watchForLegendChanges = function (legend) {
+
+            _this.getGroupLayerSymbology(legend);
+
+            //console.log("legendLayers", legend.view.map.layers)
             legend.watch('activeLayerInfos.length', function (len) {
                 _this.removeLegendDuplicateLabels();
             });
@@ -3968,6 +4008,7 @@ var ArcticMapBaseControl = function (_React$Component) {
             });
             legend.view.map.layers.on("after-changes", function (event) {
                 legend.view.map.layers.forEach(function (layer) {
+                    //console.log("layer", layer);
                     if (layer.allSublayers) {
                         layer.allSublayers.forEach(function (subLayer) {
                             subLayer.watch('visible', function (visible) {
@@ -3984,6 +4025,7 @@ var ArcticMapBaseControl = function (_React$Component) {
 
         _this.watchForLayerListChanges = function (layerList) {
             layerList.view.map.layers.on("after-changes", function (event) {
+                //console.log("viewModel",layerList.viewModel);
                 var viewModel = layerList.viewModel;
             });
         };
@@ -3991,6 +4033,7 @@ var ArcticMapBaseControl = function (_React$Component) {
         _this.removeLegendDuplicateLabels = function () {
             setTimeout(function () {
                 var elements = document.getElementsByClassName("esri-legend__layer-body");
+                //console.log("elements", elements);
                 for (var i = 0; i < elements.length; i++) {
                     if (elements[i].childNodes && elements[i].childNodes.length > 2) {
                         var element = elements[i];
@@ -4021,6 +4064,18 @@ var ArcticMapBaseControl = function (_React$Component) {
             }, 2000);
         };
 
+        _this.getGroupLayerSymbology = function (legend) {
+            var elements = document.getElementsByClassName("esri-legend__layer-body");
+            //console.log("elements", elements);
+            for (var index = 0; index < elements.length; index++) {
+                var childNode = elements.childNodes[index];
+                //console.log("childNode", childNode.innerText);
+            }
+            legend.view.map.layers.forEach(function (layer) {
+                if (layer.type === "group") ;
+            });
+        };
+
         _this.state = {
             zoomControl: null,
             renderElements: [],
@@ -4032,12 +4087,13 @@ var ArcticMapBaseControl = function (_React$Component) {
         _this.layersDiv = document.createElement("div");
         _this.legendDiv = document.createElement("div");
 
-        loadModules(['esri/widgets/Zoom', 'esri/widgets/LayerList', 'esri/widgets/Legend', 'esri/widgets/BasemapGallery']).then(function (_ref) {
-            var _ref2 = slicedToArray(_ref, 4),
+        loadModules(['esri/widgets/Zoom', 'esri/widgets/LayerList', 'esri/widgets/Legend', 'esri/widgets/BasemapGallery', 'esri/request']).then(function (_ref) {
+            var _ref2 = slicedToArray(_ref, 5),
                 Zoom = _ref2[0],
                 LayerList = _ref2[1],
                 Legend = _ref2[2],
-                BasemapGallery = _ref2[3];
+                BasemapGallery = _ref2[3],
+                esriRequest = _ref2[4];
 
             self.props.view.on('click', function (event) {
 
@@ -4089,16 +4145,83 @@ var ArcticMapBaseControl = function (_React$Component) {
                     }];
 
                     var item = event.item;
-                    if (item.layer.imageFormat) {
-                        //const item = event.item
+                    //console.log("item", item);
+                    if (item.layer.imageFormat && item.parent) {
+                        // make a request to the server to retrieve the layer image url
+                        esriRequest(item.layer.url + "/legend", {
+                            query: {
+                                f: 'json'
+                            },
+                            responseType: "json"
+                        }).then(function (response) {
+                            //console.log("response",response);
+                            var aDiv = document.createElement("Div");
+
+                            // build unique url for the legend symbol
+                            for (var i = 0; i < response.data.layers.length; i++) {
+                                var layerNum = i;
+
+                                //console.log("iLayer", layerNum, response.data.layers[layerNum]); 
+                                if (response.data.layers[layerNum].legend.length === 1) {
+                                    var img = document.createElement("img");
+                                    img.contentType = "image/png";
+                                    img.style.margin = "5px";
+                                    img.width = response.data.layers[layerNum].legend[0].width;
+                                    img.height = response.data.layers[layerNum].legend[0].height;
+                                    img.src = 'data:image/png;base64,' + response.data.layers[layerNum].legend[0].imageData;
+                                    //console.log("img", img);    
+                                    // assign image to the sublayers in layerlist
+                                    var para = document.createElement("P");
+                                    para.style.margin = "5px";
+                                    para.style.verticalAlign = "middle";
+                                    var theLabel = response.data.layers[layerNum].layerName;
+                                    var t = document.createTextNode(theLabel);
+                                    para.appendChild(img);
+                                    para.appendChild(t);
+                                    aDiv.appendChild(para);
+                                    item.panel = {
+                                        className: "esri-icon-layer-list",
+                                        content: [aDiv],
+                                        open: false
+                                    };
+                                } else if (response.data.layers[layerNum].legend.length > 1) {
+                                    for (var j = 0; j < response.data.layers[layerNum].legend.length; j++) {
+                                        var legendNum = j;
+                                        var _img = document.createElement("img");
+                                        _img.contentType = "image/png";
+                                        _img.style.margin = "5px";
+                                        _img.width = response.data.layers[layerNum].legend[legendNum].width;
+                                        _img.height = response.data.layers[layerNum].legend[legendNum].height;
+                                        _img.src = 'data:image/png;base64,' + response.data.layers[layerNum].legend[legendNum].imageData;
+                                        //console.log("img", img);
+                                        var para = document.createElement("P");
+                                        para.style.margin = "5px";
+                                        para.style.verticalAlign = "middle";
+                                        var theLabel = response.data.layers[layerNum].legend[legendNum].label;
+                                        t = document.createTextNode(theLabel);
+                                        para.appendChild(_img);
+                                        para.appendChild(t);
+                                        aDiv.appendChild(para);
+                                    }
+                                    item.panel = {
+                                        className: "esri-icon-layer-list",
+                                        content: [aDiv],
+                                        open: false
+                                    };
+                                }
+                            }                        });
+                    } else if (item.layer.imageFormat) {
                         item.panel = {
                             content: 'legend',
                             open: false
                         };
                         item.panel.watch('open', function (isOpen) {
                             self.removeLegendDuplicateLabels();
+                            //console.log("panel", item);
+                            layerList.renderNow();
                         });
                     } else {
+                        //console.log("NotImageItem",item);
                         if (self.canShowAttributeTable(item.layer.url)) {
                             actions.unshift({
                                 title: "Open Attribute Table",
@@ -4282,7 +4405,7 @@ var ArcticMapLocator = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var self = this;
-            loadModules(['esri/widgets/Locate', 'esri/widgets/BasemapGallery', 'esri/widgets/Home', 'esri/widgets/Search', 'esri/layers/FeatureLayer', 'esri/tasks/Locator', 'esri/geometry/geometryEngine', "esri/request"]).then(function (_ref) {
+            loadModules(['esri/widgets/Locate', 'esri/widgets/BasemapGallery', 'esri/widgets/Home', 'esri/widgets/Search', 'esri/layers/FeatureLayer', 'esri/rest/locator', 'esri/geometry/geometryEngine', "esri/request"]).then(function (_ref) {
                 var _ref2 = slicedToArray(_ref, 8),
                     Locate = _ref2[0],
                     BasemapGallery = _ref2[1],

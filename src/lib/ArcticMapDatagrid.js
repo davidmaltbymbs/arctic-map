@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import ArcticMapPanel from './ArcticMapPanel';
 import styles from './ArcticMapDatagrid.css';
 
+//import {
+//    loadModules
+//} from 'react-arcgis';
 
-import {
-    loadModules
-} from 'react-arcgis';
+// Use @arcgis/core or esri-loader directly in your React application
+import { setDefaultOptions } from 'esri-loader';
+
+// configure esri-loader to use version 4.25
+// and the CSS for that version from the ArcGIS CDN
+setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
 
 class ArcticMapDatagrid extends React.Component {
     static displayName = "ArcticMapDatagrid";

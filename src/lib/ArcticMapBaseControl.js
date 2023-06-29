@@ -4,7 +4,14 @@ import { geojsonToArcGIS } from '@esri/arcgis-to-geojson-utils';
 import ArcticMapButton from './ArcticMapButton';
 import ArcticMapPanel from './ArcticMapPanel';
 import ArcticMapControlArea from './ArcticMapControlArea';
-import { loadModules } from 'react-arcgis';
+//import { loadModules } from 'react-arcgis';
+// Use @arcgis/core or esri-loader directly in your React application
+import { setDefaultOptions } from 'esri-loader';
+
+// configure esri-loader to use version 4.25
+// and the CSS for that version from the ArcGIS CDN
+setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+
 import styles from './ArcticMap.css';
 
 

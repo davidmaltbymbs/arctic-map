@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from 'react-dom'
 
-import {
-    loadModules
-} from 'react-arcgis';
+//import {
+//    loadModules
+//} from 'react-arcgis';
 
+// Use @arcgis/core or esri-loader directly in your React application
+import { setDefaultOptions } from 'esri-loader';
+
+// configure esri-loader to use version 4.25
+// and the CSS for that version from the ArcGIS CDN
+setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
 
 class ArcticMapLocator extends React.Component {
     static displayName = "ArcticMapLocator";
@@ -27,7 +33,7 @@ class ArcticMapLocator extends React.Component {
       
             'esri/widgets/Search',
             'esri/layers/FeatureLayer',
-            'esri/tasks/Locator',
+            'esri/rest/locator',
             'esri/geometry/geometryEngine',
       
             "esri/request",

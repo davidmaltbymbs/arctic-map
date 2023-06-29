@@ -2,11 +2,17 @@ import React from 'react';
 import async from 'async';
 import './ArcticMap.css';
 
-import { Map, loadModules } from 'react-arcgis'
+//import { Map, loadModules } from 'react-arcgis'
+// Use @arcgis/core or esri-loader directly in your React application
+import { setDefaultOptions } from 'esri-loader';
+
+// configure esri-loader to use version 4.25
+// and the CSS for that version from the ArcGIS CDN
+setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+
 import ArcticMapButton from './ArcticMapButton';
 import ArcticMapLoader from './ArcticMapLoader';
 import ArcticMapPanel from './ArcticMapPanel';
-
 
 var style = document.createElement('style');
 style.id = "esri-overrides"
@@ -27,6 +33,7 @@ document.head.appendChild(style);
 
 class ArcticMap extends React.Component {
   static displayName = 'ArcticMap';
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -262,9 +269,10 @@ class ArcticMap extends React.Component {
       'esri/widgets/Search',
       'esri/layers/FeatureLayer',
       // 'esri/tasks/Locator',
+      'esri/rest/locator',
       'esri/geometry/geometryEngine',
-      'esri/tasks/support/IdentifyParameters',
-      //'esri.rest.support.IdentifyParameters',
+      //'esri/tasks/support/IdentifyParameters',
+      'esri/rest/support/IdentifyParameters',
       'esri/request',
       'esri/geometry/Polygon',
 
@@ -276,7 +284,7 @@ class ArcticMap extends React.Component {
 
       Search,
       FeatureLayer,
-      // Locator,
+      Locator,
       geometryEngine,
       IdentifyParameters,
       Request,
