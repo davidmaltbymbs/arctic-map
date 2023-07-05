@@ -6,11 +6,20 @@ import ReactDOM from 'react-dom'
 //} from 'react-arcgis';
 
 // Use @arcgis/core or esri-loader directly in your React application
-import { setDefaultOptions } from 'esri-loader';
+//import { setDefaultOptions } from 'esri-loader';
 
 // configure esri-loader to use version 4.25
 // and the CSS for that version from the ArcGIS CDN
-setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+//setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+import Locate from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Locate.js';
+import BasemapGallery from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/BasemapGallery.js';
+import Home from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Home.js';
+import Search from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Search.js';
+import FeatureLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/FeatureLayer.js';
+import * as locator from 'https://js.arcgis.com/4.27/@arcgis/core/rest/locator.js';
+import * as geometryEngine from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/geometryEngine.js';
+import esriRequest from 'https://js.arcgis.com/4.27/@arcgis/core/request.js';
+
 
 class ArcticMapLocator extends React.Component {
     static displayName = "ArcticMapLocator";
@@ -25,33 +34,33 @@ class ArcticMapLocator extends React.Component {
 
     componentDidMount() {
         var self = this;
-        loadModules([
-
-            'esri/widgets/Locate',
-            'esri/widgets/BasemapGallery',
-            'esri/widgets/Home',
-      
-            'esri/widgets/Search',
-            'esri/layers/FeatureLayer',
-            'esri/rest/locator',
-            'esri/geometry/geometryEngine',
-      
-            "esri/request",
-      
-          ]).then(([
-      
-            Locate,
-            BasemapGallery,
-            Home,
-      
-            Search,
-            FeatureLayer,
-            Locator,
-            geometryEngine,
-      
-            Request,
-      
-          ]) => {
+ //       loadModules([
+//
+//            'esri/widgets/Locate',
+//            'esri/widgets/BasemapGallery',
+//            'esri/widgets/Home',
+//      
+//            'esri/widgets/Search',
+//            'esri/layers/FeatureLayer',
+//            'esri/rest/locator',
+//            'esri/geometry/geometryEngine',
+//     
+//            "esri/request",
+//      
+//          ]).then(([
+//      
+//            Locate,
+//            BasemapGallery,
+//            Home,
+//      
+//            Search,
+//            FeatureLayer,
+//            Locator,
+//            geometryEngine,
+//     
+//            Request,
+//      
+//          ]) => {
             var searchsources = []
             
             
@@ -125,7 +134,7 @@ class ArcticMapLocator extends React.Component {
                 // });
               });
 
-        });
+//        });
 
 
     }

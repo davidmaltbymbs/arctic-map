@@ -11,11 +11,17 @@ import style from './ArcticMapLLDSearch.css';
 //} from 'react-arcgis';
 
 // Use @arcgis/core or esri-loader directly in your React application
-import { setDefaultOptions } from 'esri-loader';
+//import { setDefaultOptions } from 'esri-loader';
 
 // configure esri-loader to use version 4.25
 // and the CSS for that version from the ArcGIS CDN
-setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+//setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+import Geometry from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Geometry.js';
+import Polygon from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Polygon.js';
+import Graphic from "https://js.arcgis.com/4.27/@arcgis/core/Graphic.js";
+import * as geometryEngine from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/geometryEngine.js';
+import SearchSource from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Search/SearchSource.js';
+import esriRequest from 'https://js.arcgis.com/4.27/@arcgis/core/request.js'
 
 class ArcticMapLLDSearch extends React.Component {
 static displayName = 'ArcticMapLLDSearch';
@@ -37,22 +43,22 @@ static displayName = 'ArcticMapLLDSearch';
 
     componentDidMount() {
         var self = this;
-        loadModules(['esri/Graphic',
-            "esri/geometry/geometryEngine",
-            'esri/geometry/Geometry',
-            'esri/geometry/Polygon',
-            "esri/widgets/Search/SearchSource",
-            'esri/request'
-
-        ]).then(([
-            Graphic,
-            geometryEngine,
-            Geometry,
-            Polygon,
-            SearchSource,
-            esriRequest
-
-        ]) => {
+ //       loadModules(['esri/Graphic',
+ //           "esri/geometry/geometryEngine",
+ //           'esri/geometry/Geometry',
+ //           'esri/geometry/Polygon',
+ //           "esri/widgets/Search/SearchSource",
+ //           'esri/request'
+//
+//        ]).then(([
+//            Graphic,
+//            geometryEngine,
+//            Geometry,
+//            Polygon,
+//            SearchSource,
+//            esriRequest
+//
+//        ]) => {
 
 
             //var elestring = this.createElementFromHTML( `<input type="text" placeholder="Find address or place" aria-label="Search" autocomplete="off" tabindex="0" class="esri-input esri-search__input" aria-autocomplete="list" aria-haspopup="true" aria-owns="1687b00a338-widget-1-suggest-menu" role="textbox" data-node-ref="_inputNode" title="Find address or place">`);
@@ -407,7 +413,7 @@ static displayName = 'ArcticMapLLDSearch';
             
 
 
-        });
+//        });
     }
 
     searchLLD(event) {

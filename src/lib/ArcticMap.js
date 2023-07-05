@@ -2,19 +2,33 @@ import React from 'react';
 import async from 'async';
 import './ArcticMap.css';
 
-//import { Map, loadModules } from 'react-arcgis'
-// Use @arcgis/core or esri-loader directly in your React application
-import { setDefaultOptions } from 'esri-loader';
+////import { Map, loadModules } from 'react-arcgis'
+//// Use @arcgis/core or esri-loader directly in your React application
+//import { setDefaultOptions } from 'esri-loader';
 
-// configure esri-loader to use version 4.25
-// and the CSS for that version from the ArcGIS CDN
-setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+//// configure esri-loader to use version 4.25
+//// and the CSS for that version from the ArcGIS CDN
+//setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+import * as geometry from "https://js.arcgis.com/4.27/@arcgis/core/geometry.js";
+import Graphic from "https://js.arcgis.com/4.27/@arcgis/core/Graphic.js";
+import Map from 'https://js.arcgis.com/4.27/@arcgis/core/Map.js';
+import Locate from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Locate.js';
+import BasemapGallery from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/BasemapGallery.js';
+import Home from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Home.js';
+import Search from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Search.js';
+import FeatureLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/FeatureLayer.js';
+import * as locator from 'https://js.arcgis.com/4.27/@arcgis/core/rest/locator.js';
+import * as geometryEngine from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/geometryEngine.js';
+import IdentifyParameters from 'https://js.arcgis.com/4.27/@arcgis/core/rest/support/IdentifyParameters.js';
+import esriRequest from 'https://js.arcgis.com/4.27/@arcgis/core/request.js';
+import Polygon from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Polygon.js';
 
 import ArcticMapButton from './ArcticMapButton';
 import ArcticMapLoader from './ArcticMapLoader';
 import ArcticMapPanel from './ArcticMapPanel';
 
 var style = document.createElement('style');
+
 style.id = "esri-overrides"
 style.innerHTML =
   '.esri-ui-bottom-right {' +
@@ -214,15 +228,15 @@ class ArcticMap extends React.Component {
       [pt2.x, pt2.y],
       [pt2.x, pt1.y]
     ]
-    loadModules([
-      'esri/geometry/Polygon',
-      'esri/Graphic'
-
-    ]).then(([
-      Polygon,
-      Graphic
-
-    ]) => {
+//    loadModules([
+//      'esri/geometry/Polygon',
+//      'esri/Graphic'
+//
+//    ]).then(([
+//      Polygon,
+//      Graphic
+//
+//    ]) => {
       const tempPolygon = new Polygon({
         hasz: false,
         hasm: false,
@@ -244,7 +258,7 @@ class ArcticMap extends React.Component {
       if(event.action==="end"){
         view.graphics.removeAll();
       }
-    })
+//    })
   }
 
 
@@ -260,37 +274,37 @@ class ArcticMap extends React.Component {
     view.zoom = parseInt(centerSplit[2]);
     self.cntrlIsPressed = false;
 
-    loadModules([
-
-      'esri/widgets/Locate',
-      'esri/widgets/BasemapGallery',
-      'esri/widgets/Home',
-
-      'esri/widgets/Search',
-      'esri/layers/FeatureLayer',
-      // 'esri/tasks/Locator',
-      'esri/rest/locator',
-      'esri/geometry/geometryEngine',
-      //'esri/tasks/support/IdentifyParameters',
-      'esri/rest/support/IdentifyParameters',
-      'esri/request',
-      'esri/geometry/Polygon',
-
-    ]).then(([
-
-      Locate,
-      BasemapGallery,
-      Home,
-
-      Search,
-      FeatureLayer,
-      Locator,
-      geometryEngine,
-      IdentifyParameters,
-      Request,
-      Polygon,
-
-    ]) => {
+//    loadModules([
+//
+//      'esri/widgets/Locate',
+//      'esri/widgets/BasemapGallery',
+//      'esri/widgets/Home',
+//
+//      'esri/widgets/Search',
+//      'esri/layers/FeatureLayer',
+//      // 'esri/tasks/Locator',
+//      'esri/rest/locator',
+//      'esri/geometry/geometryEngine',
+//      //'esri/tasks/support/IdentifyParameters',
+//      'esri/rest/support/IdentifyParameters',
+//      'esri/request',
+//      'esri/geometry/Polygon',
+//
+//    ]).then(([
+//
+//      Locate,
+//      BasemapGallery,
+//      Home,
+//
+//      Search,
+//      FeatureLayer,
+//      Locator,
+//      geometryEngine,
+//      IdentifyParameters,
+//      Request,
+//      Polygon,
+//
+//    ]) => {
       window._request = Request;
       window._map = self;
       self.request = Request;
@@ -893,7 +907,7 @@ class ArcticMap extends React.Component {
           self.props.onmapready(evt);
         }
       }, 500)
-    })
+//    })
   }
 
   identPostProcess (identresults) { 

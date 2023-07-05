@@ -6,11 +6,16 @@ import ArcticMapPanel from './ArcticMapPanel';
 import ArcticMapControlArea from './ArcticMapControlArea';
 //import { loadModules } from 'react-arcgis';
 // Use @arcgis/core or esri-loader directly in your React application
-import { setDefaultOptions } from 'esri-loader';
+//import { setDefaultOptions } from 'esri-loader';
 
 // configure esri-loader to use version 4.25
 // and the CSS for that version from the ArcGIS CDN
-setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+//setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+import Zoom from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Zoom.js';
+import LayerList from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/LayerList.js';
+import Legend from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Legend.js';
+import BasemapGallery from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/BasemapGallery.js';
+import esriRequest from 'https://js.arcgis.com/4.27/@arcgis/core/request.js';
 
 import styles from './ArcticMap.css';
 
@@ -33,19 +38,19 @@ class ArcticMapBaseControl extends React.Component {
         this.legendDiv = document.createElement("div");
 
 
-        loadModules([
-            'esri/widgets/Zoom',
-            'esri/widgets/LayerList',
-            'esri/widgets/Legend',
-            'esri/widgets/BasemapGallery',
-            'esri/request',
-        ]).then(([
-            Zoom,
-            LayerList,
-            Legend,
-            BasemapGallery,
-            esriRequest,
-        ]) => {
+//        loadModules([
+//            'esri/widgets/Zoom',
+//            'esri/widgets/LayerList',
+//            'esri/widgets/Legend',
+//            'esri/widgets/BasemapGallery',
+//            'esri/request',
+//        ]).then(([
+//            Zoom,
+//            LayerList,
+//            Legend,
+//            BasemapGallery,
+//            esriRequest,
+//        ]) => {
 
             self.props.view.on('click', (event) => {
 
@@ -241,7 +246,7 @@ class ArcticMapBaseControl extends React.Component {
             //self.state.view.ui.add(layerList, 'top-left')
             //var joined = self.state.renderElements.concat(self.zoomControlDiv);
             this.setState({ renderElements: self.state.renderElements.concat(self.zoomControlDiv) })
-        })
+//        })
 
     }
 

@@ -6,11 +6,22 @@ import { geojsonToArcGIS } from '@esri/arcgis-to-geojson-utils';
 //    loadModules
 //} from 'react-arcgis';
 // Use @arcgis/core or esri-loader directly in your React application
-import { setDefaultOptions } from 'esri-loader';
+//import { setDefaultOptions } from 'esri-loader';
 
 // configure esri-loader to use version 4.25
 // and the CSS for that version from the ArcGIS CDN
-setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+//setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+import Graphic from "https://js.arcgis.com/4.27/@arcgis/core/Graphic.js";
+import FeatureLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/FeatureLayer.js';
+import MapImageLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/MapImageLayer.js';
+import ImageryLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/ImageryLayer.js';
+import GraphicsLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/GraphicsLayer.js';
+import * as identify from 'https://js.arcgis.com/4.27/@arcgis/core/rest/identify.js';
+import IdentifyParameters from 'https://js.arcgis.com/4.27/@arcgis/core/rest/support/IdentifyParameters.js';
+import Point from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Point.js';
+import SimpleMarkerSymbol from 'https://js.arcgis.com/4.27/@arcgis/core/symbols/SimpleMarkerSymbol.js';
+import GroupLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/GroupLayer.js';
+import Renderer from 'https://js.arcgis.com/4.27/@arcgis/core/renderers/Renderer.js'
 
 class ArcticMapLayer extends React.Component {
     static displayName = "ArcticMapLayer";
@@ -35,34 +46,34 @@ class ArcticMapLayer extends React.Component {
     componentDidMount() {
         var self = this;
 //        console.log("ComponentDidMount: "+this.props.title);
-        loadModules(['esri/Graphic',
-            "esri/layers/FeatureLayer",
-            "esri/layers/MapImageLayer",
-            "esri/layers/ImageryLayer",
-
-            "esri/layers/GraphicsLayer",
-            "esri/rest/identify",
-            //"esri/tasks/IdentifyTask",
-            //"esri/tasks/support/IdentifyParameters",
-            "esri/rest/support/IdentifyParameters",
-            "esri/geometry/Point",
-            "esri/symbols/SimpleMarkerSymbol",
-            "esri/layers/GroupLayer",
-            "esri/renderers/Renderer"
-        ]).then(([
-            Graphic,
-            FeatureLayer,
-            MapImageLayer,
-            ImageryLayer,
-
-            GraphicsLayer,
-            identify,
-            IdentifyParameters,
-            Point,
-            SimpleMarkerSymbol,
-            GroupLayer,
-            Renderer
-        ]) => {
+//        loadModules(['esri/Graphic',
+//            "esri/layers/FeatureLayer",
+//            "esri/layers/MapImageLayer",
+//            "esri/layers/ImageryLayer",
+//
+//            "esri/layers/GraphicsLayer",
+//            "esri/rest/identify",
+//            //"esri/tasks/IdentifyTask",
+//            //"esri/tasks/support/IdentifyParameters",
+//            "esri/rest/support/IdentifyParameters",
+//            "esri/geometry/Point",
+//            "esri/symbols/SimpleMarkerSymbol",
+//            "esri/layers/GroupLayer",
+//            "esri/renderers/Renderer"
+//        ]).then(([
+//            Graphic,
+//            FeatureLayer,
+//            MapImageLayer,
+//            ImageryLayer,
+//
+//            GraphicsLayer,
+//            identify,
+//            IdentifyParameters,
+//            Point,
+//            SimpleMarkerSymbol,
+//            GroupLayer,
+//            Renderer
+//        ]) => {
             // Create a polygon geometry
 
             var children2 = [];
@@ -506,7 +517,7 @@ class ArcticMapLayer extends React.Component {
             });
 
             //this.state.view.graphics.add(graphic);
-        }); //.catch ((err) => console.error(err));
+//        }); //.catch ((err) => console.error(err));
     }
 
     zoomto() {

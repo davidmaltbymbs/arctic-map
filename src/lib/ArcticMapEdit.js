@@ -11,11 +11,18 @@ import style from  './ArcticMapEdit.css';
 //} from 'react-arcgis';
 
 // Use @arcgis/core or esri-loader directly in your React application
-import { setDefaultOptions } from 'esri-loader';
+//import { setDefaultOptions } from 'esri-loader';
 
 // configure esri-loader to use version 4.25
 // and the CSS for that version from the ArcGIS CDN
-setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+//setDefaultOptions({ version: '4.25', css: true, insertCssBefore: 'style' });
+import Geometry from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Geometry.js';
+import Polygon from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Polygon.js';
+import Polyline from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/Polyline.js';
+import * as geometryEngine from 'https://js.arcgis.com/4.27/@arcgis/core/geometry/geometryEngine.js'
+import Graphic from "https://js.arcgis.com/4.27/@arcgis/core/Graphic.js";
+import GraphicsLayer from 'https://js.arcgis.com/4.27/@arcgis/core/layers/GraphicsLayer.js';
+import SketchViewModel from 'https://js.arcgis.com/4.27/@arcgis/core/widgets/Sketch/SketchViewModel.js';
 
 class ArcticMapEdit extends React.Component {
     static displayName = 'ArcticMapEdit';
@@ -49,22 +56,22 @@ class ArcticMapEdit extends React.Component {
 
 
         var self = this;
-        loadModules(["esri/Graphic",
-            "esri/layers/GraphicsLayer",
-            "esri/widgets/Sketch/SketchViewModel",
-            "esri/geometry/Geometry",
-            "esri/geometry/Polygon",
-            "esri/geometry/Polyline",
-            "esri/geometry/geometryEngine"
-        ]).then(([
-            Graphic,
-            GraphicsLayer,
-            SketchViewModel,
-            Geometry,
-            Polygon,
-            Polyline,
-            geometryEngine
-        ]) => {
+//        loadModules(["esri/Graphic",
+//            "esri/layers/GraphicsLayer",
+//            "esri/widgets/Sketch/SketchViewModel",
+//            "esri/geometry/Geometry",
+//            "esri/geometry/Polygon",
+//            "esri/geometry/Polyline",
+//            "esri/geometry/geometryEngine"
+//        ]).then(([
+//            Graphic,
+//            GraphicsLayer,
+//            SketchViewModel,
+//            Geometry,
+//           Polygon,
+//            Polyline,
+//            geometryEngine
+//        ]) => {
             const tempGraphicsLayer = new GraphicsLayer({ title: 'Edit Layer', listMode: "hide" });
             self.setState({ tempGraphicsLayer });
 
@@ -326,7 +333,7 @@ class ArcticMapEdit extends React.Component {
             }
             self.setGeoJson = self.setGeoJson.bind(self);
 
-        }); //.catch ((err) => console.error(err));
+//        }); //.catch ((err) => console.error(err));
 
     }
 
