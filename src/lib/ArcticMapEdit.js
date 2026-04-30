@@ -190,7 +190,8 @@ class ArcticMapEdit extends React.Component {
                         name.includes("Shape") ||
                         name.includes("KML") ||
                         name.includes("GML") ||
-                        name.includes("GPX")
+                        name.includes("GPX") || 
+                        name.includes("GEOJSON")
                     ) {
                         feature.sourceLayer = "Shapefile";
                     }
