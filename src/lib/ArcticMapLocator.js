@@ -55,12 +55,19 @@ class ArcticMapLocator extends React.Component {
         if (self.props.searchSources) {
             self.props.searchSources.map(searchSource => {
               
+              if(searchSource.scr)
+              {
               var searchFeature = new FeatureLayer({
                 url: searchSource.scr + searchSource.layerid
               });
               searchSource.layer=searchFeature;
 
               searchsources.push(searchSource);
+            }
+            else
+            {
+              searchsources.push(searchSource);
+            }
             })
           }
 
