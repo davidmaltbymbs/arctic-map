@@ -234,48 +234,67 @@ class ArcticMapBaseControl extends React.Component {
           );            
         this.watchForLayerListChanges(layerList);
 
-        reactiveUtils.on(
+        this.layerListHandle = reactiveUtils.on(
             () => layerList,
             "trigger-action",
             (event) => {
-                if (event.action.id === "toggle-labels") {
-                    if (event.action.className === "esri-icon-checkbox-unchecked") {
-                        event.action.className = "esri-icon-checkbox-checked";
-                        event.item.layer.labelsVisible=true;
-                    }
-                    else {
-                        event.action.className = "esri-icon-checkbox-unchecked";
-                        event.item.layer.labelsVisible=false;
-                    }
+                const layer = event.item?.layer;
+
+                if (!layer) {
+                    console.log("There was a problem with the layer in AMBaseControl.");
+                    return;
                 }
-                if (event.action.id === "increase-opacity") {
-                    event.item.layer.opacity += 0.1;
-                    event.item.layer.opacity >= 1 ? event.item.layer.opacity = 1:  event.item.layer.opacity;
-                }
-                if (event.action.id === "decrease-opacity") {
-                    event.item.layer.opacity -= 0.1;
-                    event.item.layer.opacity <= 0 ? event.item.layer.opacity = 0:  event.item.layer.opacity;
-                }
-                if (event.action.id === "open-attribute-table") {
-                    //console.log("OpenAttributeTable");
-                    self.props.openAttributesTable({
-                        view: self.props.view,
-                        url: event.item.layer.url,
-                        title: event.item.layer.title,
-                        fields: self.getAttributeTableLayerFields(event.item.layer.url),
-                        hiddenFields: self.getAttributeTableLayerHiddenFields(event.item.layer.url)
-                        });
-                }
-                if (event.action.id === "open-map-service") {
-                    self.props.openMapService({
-                        url: event.item.layer.url
+
+                switch (event.action.id) {
+                
+                    case "toggle-labels":
+                        layer.labelsVisible = !layer.labelsVisible;
+
+                        event.action.className = layer.labelsVisible
+                            ? "esri-icon-checkbox-checked"
+                            : "esri-icon-checkbox-checked";
+                            break;
+                    
+                    case "increase-opacity":
+                        layer.opacity = Math.min(
+                            1,
+                            Math.round((layer.opacity + 0.1) * 10) /10
+                        );
+                        break;
+                
+                    case "decrease-opacity":
+                        layer.opacity = Math.max(
+                            1,
+                            Math.round((layer.opacity - 0.1) * 10) /10
+                        );
+                        break;
+                
+                    case "open-attribute-table":
+                        if (!layer.url){
+                            return;
+                        }
+
+                        this.props.openAttributesTable({
+                            view: this.props.view,
+                            url: layer.url,
+                            title: layer.title,
+                            fields: this.getAttributeTableLayerFields(layer.url),
+                            hiddenFields: this.getAttributeTableLayerHiddenFields(layer.url)
+                            });
+                        break;
+                
+                    case "open-map-service":
+                        if (!layer.url){
+                            return;
+                        }
+
+                        this.props.openMapService({
+                            url: layer.url
                         });                    
+                        break;
+                        
                 }
             });
-        //self.state.view.ui.add(layerList, 'top-left')
-        //var joined = self.state.renderElements.concat(self.zoomControlDiv);
-        //this.state.renderElements = self.state.renderElements.concat(self.zoomControlDiv);
-        //this.setState({ renderElements: self.state.renderElements.concat(self.zoomControlDiv) })
     }
 
     canShowAttributeTable = (layerUrl) => {
