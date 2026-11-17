@@ -252,7 +252,7 @@ class ArcticMapBaseControl extends React.Component {
 
                         event.action.className = layer.labelsVisible
                             ? "esri-icon-checkbox-checked"
-                            : "esri-icon-checkbox-checked";
+                            : "esri-icon-checkbox-unchecked";
                             break;
                     
                     case "increase-opacity":
